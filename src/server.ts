@@ -21,6 +21,11 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);  
 app.use('/api/users', userRoutes);
 
+app.get('/', function(req, res) {
+  res.send('Hello')
+})
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
