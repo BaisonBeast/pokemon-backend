@@ -1,0 +1,6 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "ignore": ["src/**/*.spec.ts"],
+    "exec": "ts-node --transpileOnly --experimental-specifier-resolution=node ./src/server.ts"
+}
