@@ -10,10 +10,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors({
-  origin: process.env.API_URL 
-}));
-
+app.use(cors());
 connectDB();
 
 app.use(bodyParser.json());
