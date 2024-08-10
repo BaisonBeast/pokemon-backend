@@ -8,10 +8,11 @@ import cors from 'cors';
 
 dotenv.config();
 const port = process.env.PORT;
+const API_URL = process.env.API_URL;
 const app = express();
 
 const corsOptions = {
-  origin: port,
+  origin: API_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
 };
