@@ -64,19 +64,28 @@ router.get('/search', async (req, res) => {
     }
 });
 
-router.get('/leaderboard', async(req: Request, res: Response) => {
+router.get('/leaderboard', async (req: Request, res: Response) => {
     try {
         const users = await User.find({ role: 'trainer' });
-        const trainers = users.map(user => {return {
-            username: user.username,
-            userId: user.userId,
-            pokemon: user.pokemons[0].name,
-            likes: user.likes.length
-        }});
+
+        if (users.length === 0) {
+            return res.status(200).send('No users found');
+        }
+
+        const trainers = users.map(user => {
+            const pokemonName = user.pokemons.length > 0 ? user.pokemons[0].name : 'No Pokémon';
+            return {
+                username: user.username,
+                userId: user.userId,
+                pokemon: pokemonName,
+                likes: user.likes.length
+            };
+        });
+
         trainers.sort((a, b) => b.likes - a.likes);
         res.status(200).json(trainers);
-    } catch(err) {
-        res.status(400).json(`Something went wrong ${err}`);
+    } catch (err) {
+        res.status(400).json({ message: 'Something went wrong', err });
     }
 });
 
