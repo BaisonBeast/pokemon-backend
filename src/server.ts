@@ -10,7 +10,13 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://app.example.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+};
+
+app.use(cors(corsOptions));
 connectDB();
 
 app.use(bodyParser.json());
@@ -18,9 +24,9 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);  
 app.use('/api/users', userRoutes);
 
-app.get('/', function(req, res) {
-  res.send('Hello')
-})
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 
 
 app.listen(port, () => {
