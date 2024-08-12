@@ -16,7 +16,7 @@ router.post('/like', isJudge, async(req: Request , res: Response) => {
             return res.status(404).send('User not found.');
         }
 
-        if (!user.likes.includes(judgeId)) {
+        if (user.likes.includes(judgeId)) {
             return res.status(200).send('You have already liked the user');
         }
         user.likes.push(judgeId);
