@@ -17,10 +17,10 @@ router.post('/like', isJudge, async(req: Request , res: Response) => {
         }
 
         if (!user.likes.includes(judgeId)) {
-            user.likes.push(judgeId);
-            await user.save();
+            return res.status(200).send('You have already liked the user');
         }
-    
+        user.likes.push(judgeId);
+        await user.save();
         res.status(200).send('Trainer liked successfully.');
     } catch(err) {
         res.status(400).json(`Something went wrong ${err}`);
@@ -52,7 +52,6 @@ router.get('/search', async (req, res) => {
         const data = fs.readFileSync(filePath, 'utf-8');
         const pokemons = JSON.parse(data);
 
-        // Filter pokemons based on the query
         const filteredPokemons = pokemons.filter((pokemon: any) =>
             pokemon.name.toLowerCase().includes(query.toLowerCase())
         );

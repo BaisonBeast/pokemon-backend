@@ -6,7 +6,6 @@ import { v4 as uuid } from 'uuid';
 
 const router = express.Router();
 
-// Interfaces for Request Body and Response Data
 interface SignupRequestBody {
     username: string;
     password: string;
@@ -36,7 +35,6 @@ interface LoginSuccessResponse {
     userData: UserData;
 }
 
-// Signup Route
 router.post('/signup', async (req: Request<{}, {}, SignupRequestBody>, res: Response<SignupSuccessResponse | ErrorResponse>) => {
     try {
         const { username, password, role } = req.body;
@@ -66,7 +64,6 @@ router.post('/signup', async (req: Request<{}, {}, SignupRequestBody>, res: Resp
     }
 });
 
-// Login Route
 router.post('/login', async (req: Request<{}, {}, LoginRequestBody>, res: Response<LoginSuccessResponse | ErrorResponse>) => {
     try {
         const { username, password } = req.body;
